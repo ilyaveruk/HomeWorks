@@ -24,8 +24,9 @@ public class Node {
 			count++;
 			return;
 		}
- 
+
 		char tempChar = s.charAt(0);
+		
 
 		if (children['z' - tempChar] == null)
 			children['z' - tempChar] = new Node();
