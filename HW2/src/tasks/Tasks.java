@@ -18,7 +18,7 @@ public class Tasks {
 	}
 	
 	public int[] order() {
-		
-		
+		int []a = null;
+		return a;
 	}
 }
