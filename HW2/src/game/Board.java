@@ -61,6 +61,7 @@ public class Board {
 		return str;		
 	}		
 			
+	@SuppressWarnings("unused")
 	private int rayLength(int x, int y, int dx, int dy) {
 		
 		return 0;
