@@ -55,16 +55,17 @@ public class Board {
 	// makes string out of "board" matrix with the marks of the players
 	public String toString() {
 
-		String str = "";
+		String s = "";
 		for (int i = 0; i < n; i++) {
-			str += "\n";
-			for (int j = 0; j < m; j++)
-				if (board[i][j] != null)
-					str += board[i][j].getMark();
+			for (int j = 0; j < m; j++) {
+				if (this.isEmpty(i, j) == true)
+					s += ".";
 				else
-					str += ".";
+					s += board[i][j].getMark();
+			}
+			s += "\n";
 		}
-		return str;
+		return s;
 	}
 
 	private int rayLength(int x, int y, char s1, char s2, char mark) {
