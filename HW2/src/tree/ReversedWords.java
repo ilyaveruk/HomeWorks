@@ -3,7 +3,7 @@ package tree;
 import java.util.Scanner;
 
 public class ReversedWords {
-
+	//checks the number of reversed words in a line 
 	public static int checkReversed() {
 
 		int count = 0;
