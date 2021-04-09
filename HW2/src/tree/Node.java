@@ -3,7 +3,7 @@ package tree;
 public class Node {
 	private int count;
 	private Node[] children = new Node['z' - 'a' + 1]; // children[26]
-
+	//return the number of string "s" in the tree
 	public int num(String s) {
 
 		if (s.isEmpty())
@@ -17,7 +17,7 @@ public class Node {
 		return children['z' - tempChar].num(s.substring(1));
 
 	}
-
+	//adds the string "s" to the tree
 	public void add(String s) {
 
 		if (s.isEmpty()) {
