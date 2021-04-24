@@ -1,3 +1,4 @@
+package iterator;
 
 public class Fibonacci implements MyIterator {
 

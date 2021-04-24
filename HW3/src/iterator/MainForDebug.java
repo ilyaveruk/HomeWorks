@@ -1,3 +1,4 @@
+package iterator;
 
 public class MainForDebug {
 	public static void main(String[] args) {

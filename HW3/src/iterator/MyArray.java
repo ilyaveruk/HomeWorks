@@ -1,3 +1,4 @@
+package iterator;
 import java.util.NoSuchElementException;
 
 public class MyArray implements MyIterator{
