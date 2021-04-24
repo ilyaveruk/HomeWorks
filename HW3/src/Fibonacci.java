@@ -1,30 +1,35 @@
 
+public class Fibonacci implements MyIterator {
 
-public class Fibonacci implements MyIterator{
-	
 	private int upperBound;
-	int fib1=1, fib2=1,current;
-	
+	int previousNumber = 1, nextNumber = 1, current, count;
+
 	public Fibonacci(int upperBound) {
-		this.upperBound=upperBound;
+		this.upperBound = upperBound;
 	}
-	
+
 	@Override
 	public boolean hasNext() {
-		return current < upperBound;
+		return nextNumber + previousNumber < upperBound;
 	}
-	
+
 	@Override
 	public int next() {
-		
-		if(!hasNext())
+
+		if (hasNext() && count >= 2) {
+			current = nextNumber + previousNumber;
+			nextNumber = previousNumber;
+			previousNumber = current;
+			count++;
 			return current;
-		
-		current=fib1;
-		fib1=fib2;
-		fib2=fib1+current;
-		
-		return current;
+		} else if (count == 0) {
+			count++;
+			return nextNumber;
+		}
+
+		count++;
+		return previousNumber;
+
 	}
 
 }

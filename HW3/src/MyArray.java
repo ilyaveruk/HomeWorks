@@ -15,10 +15,10 @@ public class MyArray implements MyIterator{
 	
 	@Override
 	public int next() {
-		
-		if(!hasNext())
+
+		if (!hasNext())
 			throw new NoSuchElementException();
-		
+
 		return arr[numOfCalls++];
 	}
 
