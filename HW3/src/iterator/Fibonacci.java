@@ -3,7 +3,7 @@ package iterator;
 public class Fibonacci implements MyIterator {
 
 	private int upperBound;
-	int previousNumber = 1, nextNumber = 1, current, count;
+	private int previousNumber = 1, nextNumber = 1, current, count;
 
 	public Fibonacci(int upperBound) {
 		this.upperBound = upperBound;
