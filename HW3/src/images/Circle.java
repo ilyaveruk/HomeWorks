@@ -3,32 +3,31 @@ package images;
 public class Circle extends BaseImage {
 
 	private int centerX, centerY, radius;
-	private RGB center, outside;
 
 	public Circle(int width, int height, int centerX, int centerY, int radius, RGB center, RGB outside) {
-		super(width, height);
+		super(width, height, center, outside);
+		this.radius=radius;
 		this.centerX = centerX;
 		this.centerY = centerY;
-		this.center = center;
-		this.outside = outside;
 	}
 
 	public Circle(int size, int radius, RGB center, RGB outside) {
-		super(size, size);
+		super(size, size, center, outside);
 		this.radius = radius;
-		this.center = center;
-		this.outside = outside;
 	}
 
 	@Override
 	public RGB get(int x, int y) {
 
-		double rdX = x - centerX;
-		double rdY = y - centerY;
+		double distance = Math.sqrt(Math.pow((x - (double) centerX), 2) + Math.pow(y - (double) centerY, 2));
 
-		double newR = radius / Math.sqrt(rdX * rdX + rdY * rdY);
+		if (distance > radius)
+			distance = radius;
 
-		return RGB.mix(center, outside, newR);
+		return RGB.mix(super.getRgb2(), super.getRgb1(), distance / (double) radius);
 	}
+	
+	
+	
 
 }

@@ -46,7 +46,7 @@ public class RGB {
 	}
 
 	public static RGB superpose(RGB rgb1, RGB rgb2) {
-		RGB newColor = new RGB(0,0,0);//should be initialized to null
+		RGB newColor = new RGB(0, 0, 0);// should be initialized to null
 
 		newColor.red = (rgb1.red + rgb2.red) > 1 ? 1 : rgb1.red + rgb2.red;
 		newColor.green = (rgb1.green + rgb2.green) > 1 ? 1 : rgb1.green + rgb2.green;
@@ -57,7 +57,7 @@ public class RGB {
 	}
 
 	public static RGB mix(RGB rgb1, RGB rgb2, double alpha) {
-		RGB newColor = new RGB(0,0,0);//should be initialized to null
+		RGB newColor = new RGB(0, 0, 0);// should be initialized to null
 
 		newColor.red = alpha * rgb1.red + (1 - alpha) * rgb2.red;
 		newColor.green = alpha * rgb1.green + (1 - alpha) * rgb2.green;
