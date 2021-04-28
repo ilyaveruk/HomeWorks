@@ -6,7 +6,7 @@ public class Circle extends BaseImage {
 
 	public Circle(int width, int height, int centerX, int centerY, int radius, RGB center, RGB outside) {
 		super(width, height, center, outside);
-		this.radius=radius;
+		this.radius = radius;
 		this.centerX = centerX;
 		this.centerY = centerY;
 	}
@@ -26,8 +26,5 @@ public class Circle extends BaseImage {
 
 		return RGB.mix(super.getRgb2(), super.getRgb1(), distance / (double) radius);
 	}
-	
-	
-	
 
 }

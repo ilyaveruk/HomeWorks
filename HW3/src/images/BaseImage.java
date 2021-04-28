@@ -1,16 +1,18 @@
 package images;
 
 public abstract class BaseImage implements Image {
-//should be one abstract method
+//should be one abstract method // added
 	private int width, height;
 	private RGB rgb1, rgb2;
 
 	public BaseImage(int width, int height, RGB rgb1, RGB rgb2) {
 		this.width = width;
 		this.height = height;
-		this.rgb1=rgb1;
-		this.rgb2=rgb2;
+		this.rgb1 = rgb1;
+		this.rgb2 = rgb2;
 	}
+
+	public abstract RGB get(int x, int y);
 
 	@Override
 	public int getWidth() {
@@ -23,11 +25,11 @@ public abstract class BaseImage implements Image {
 
 		return height;
 	}
-	
+
 	public RGB getRgb1() {
 		return rgb1;
 	}
-	
+
 	public RGB getRgb2() {
 		return rgb2;
 	}

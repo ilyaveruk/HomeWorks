@@ -2,11 +2,9 @@ package images;
 
 public class Gradient extends BaseImage {
 
-	
-
 	public Gradient(int width, int height, RGB start, RGB end) {
-		super(width, height,start,end);
-		
+		super(width, height, start, end);
+
 	}
 
 	@Override
