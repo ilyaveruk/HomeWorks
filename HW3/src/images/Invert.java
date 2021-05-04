@@ -1,29 +1,15 @@
 package images;
 
 public class Invert extends ImageDecorator {
-
-	private Image base;
-	
+	//constructor and inherits the base width and height
 	public Invert(Image base) {
-		this.base=base;
+		this.width = base.getWidth();
+		this.height = base.getHeight();
+		this.base = base;
 	}
-	
-	@Override
-	public int getWidth() {
-		
-		return base.getWidth();
-	}
-
-	@Override
-	public int getHeight() {
-		
-		return base.getHeight();
-	}
-
+	//implements the given x and y of the original get function and applies invert function on it
 	@Override
 	public RGB get(int x, int y) {
-		
-		return base.get(x - base.getHeight() / 2, y - base.getWidth() / 2).invert();
+		return super.get(x, y).invert();
 	}
-
 }

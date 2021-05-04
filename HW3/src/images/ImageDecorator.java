@@ -1,11 +1,23 @@
 package images;
 
 public abstract class ImageDecorator implements Image {
+	//implements the image interface with getters and the get function of the base
+	protected int width, height;
+	protected Image base;
 
-	public abstract int getWidth();
+	@Override
+	public int getWidth() {
+		return width;
+	}
 
-	public abstract int getHeight();
+	@Override
+	public int getHeight() {
+		return height;
+	}
 
-	public abstract RGB get(int x, int y);
+	@Override
+	public RGB get(int x, int y) {
+		return base.get(x, y);
+	}
 
 }
