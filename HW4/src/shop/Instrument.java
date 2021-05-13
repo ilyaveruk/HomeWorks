@@ -1,38 +1,50 @@
 package shop;
 
 public abstract class Instrument {
-	
+
 	protected String company;
 	private int price;
-	static int serial;
-	
+	protected static int serial = 0;
+	private int serialID;
+
 	public Instrument(String company, int price) {
-	this.company=company;
-	this.price=price;
+		this.company = company;
+		this.price = price;
+		this.serialID = serial++;
 	}
-	
+
 	public int getPrice() {
 		return price;
 	}
-	
+
 	public String getCompany() {
 		return company;
 	}
-	
+
 	public int getSerial() {
-		return serial++;
+		return serialID;
 	}
-	
-	
-	
-	public static void main(String[] args) {
+
+	public static void main(String[] args) throws MusicShopException {
 		Shop s = new Shop();
-		s.add(new Guitar("Gibson", 1000, Type.ACOUSTIC));
+		s.add(new Guitar("son", 1000, Type.ACOUSTIC));
 		s.add(new Piano("Yamaha", 5000, 6));
-		s.add(new Piano("Yamaha", 10000, 7));
-		s.add(new Guitar("Fender", 4000, Type.ELECTRIC));
+		s.add(new Guitar("son", 1000, Type.ACOUSTIC));
+		s.add(new Guitar("son", 1000, Type.ACOUSTIC));
+		s.add(new Guitar("son", 1000, Type.ELECTRIC));
 
 		System.out.println(s.allSerials());
-		System.out.println(s.guitarsOfType(Type.ELECTRIC));
+		// System.out.println(s.guitarsOfType(Type.ACOUSTIC));//need to fix
+		System.out.println(s.get(3));
+		
+		
+		s.sell(0);
+		s.sell(2);
+		
+
+		System.out.println(s.allSerials());
+		
+		
 	}
+
 }

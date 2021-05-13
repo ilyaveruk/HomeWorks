@@ -1,11 +1,13 @@
 package shop;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 public class Shop {
 
-	ArrayList<Instrument> InsArr = new ArrayList<Instrument>();
+	List<Instrument> InsArr = new ArrayList<Instrument>();
+	List<Instrument> deletedArr = new ArrayList<Instrument>();
 
 	public void add(Instrument i) {
 		InsArr.add(i);
@@ -16,7 +18,6 @@ public class Shop {
 		for (Instrument a : InsArr)
 			if (a.getSerial() == serial)
 				return a;
-
 		return null;
 
 	}
@@ -33,22 +34,30 @@ public class Shop {
 
 	public List<Integer> guitarsOfType(Type t) {
 
-		List<Integer> list = new ArrayList<Integer>();
+		List<Integer> typeList = new ArrayList<Integer>();
+
+		for (Instrument ins : InsArr)
+			if (ins instanceof Guitar) {
+				Guitar temp = (Guitar) ins;
+				if (temp.getType() == t)
+					typeList.add(ins.getSerial());
+			}
+
+		return typeList;
+	}
+
+	public void sell(int serial) throws MusicShopException {
 
 		for (int i = 0; i < InsArr.size(); i++) {
-			if (InsArr.get(i) instanceof Guitar) {
-				Guitar temp = (Guitar) InsArr.get(i);
-				if (temp.getType() == t)
-					list.add(InsArr.get(i).getSerial());
+		
+
+			if (InsArr.get(i).getSerial() == serial) {
+				deletedArr.add(InsArr.get(i));
+				InsArr.remove(i);
 			}
+
 		}
 
-		return list;
-	}
-	
-	public void sell(int serial) throws MusicShopException{
-		
-		
 	}
 
 }

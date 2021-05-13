@@ -7,6 +7,7 @@ public class Guitar extends Instrument {
 	public Guitar(String company, int price, Type type) {
 		super(company, price);
 		this.type = type;
+
 	}
 
 	public Type getType() {

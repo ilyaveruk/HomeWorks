@@ -3,9 +3,10 @@ package shop;
 public class Piano extends Instrument {
 
 	int octaves;
+	
 
 	public Piano(String company, int price, int octaves) {
-		super(company, price);
+		super(company, price );
 		this.octaves = octaves;
 	}
 
@@ -17,5 +18,6 @@ public class Piano extends Instrument {
 	public String toString() {
 		return String.format("Piano(%d octaves) %s(%d), price=%d", octaves, company, getSerial(), getPrice());
 	}
+	
 
 }
