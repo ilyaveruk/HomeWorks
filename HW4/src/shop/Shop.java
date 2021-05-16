@@ -6,8 +6,7 @@ import java.util.List;
 
 public class Shop {
 
-	List<Instrument> InsArr = new ArrayList<Instrument>();
-	List<Instrument> deletedArr = new ArrayList<Instrument>();
+	private List<Instrument> InsArr = new ArrayList<Instrument>();
 
 	public void add(Instrument i) {
 		InsArr.add(i);
@@ -48,15 +47,34 @@ public class Shop {
 
 	public void sell(int serial) throws MusicShopException {
 
-		for (int i = 0; i < InsArr.size(); i++) {
-		
+		int guitarCount = 0, index = 0;
 
-			if (InsArr.get(i).getSerial() == serial) {
-				deletedArr.add(InsArr.get(i));
-				InsArr.remove(i);
-			}
+		if (get(serial) == null)
+			throw new MusicShopException("There is no such instrument in stock");
 
+		for (Instrument ins : InsArr) {
+			if (ins.getSerial() == serial)
+				index = InsArr.indexOf(ins);
+			if (ins instanceof Guitar)
+				guitarCount++;
 		}
+		if (get(serial) instanceof Guitar && (guitarCount) == 1)
+			throw new MusicShopException("Only one guitar left");
+		else
+			InsArr.remove(index);
+	}
+
+	public int sellAll(int[] serials) throws MusicShopException {
+		int unsold = 0;
+		
+		try {
+			for (int i = 0; i < serials.length; i++)
+				sell(serials[i]);
+		} catch (MusicShopException e) {
+			unsold++;
+		}
+
+		return unsold;
 
 	}
 

@@ -25,26 +25,4 @@ public abstract class Instrument {
 		return serialID;
 	}
 
-	public static void main(String[] args) throws MusicShopException {
-		Shop s = new Shop();
-		s.add(new Guitar("son", 1000, Type.ACOUSTIC));
-		s.add(new Piano("Yamaha", 5000, 6));
-		s.add(new Guitar("son", 1000, Type.ACOUSTIC));
-		s.add(new Guitar("son", 1000, Type.ACOUSTIC));
-		s.add(new Guitar("son", 1000, Type.ELECTRIC));
-
-		System.out.println(s.allSerials());
-		// System.out.println(s.guitarsOfType(Type.ACOUSTIC));//need to fix
-		System.out.println(s.get(3));
-		
-		
-		s.sell(0);
-		s.sell(2);
-		
-
-		System.out.println(s.allSerials());
-		
-		
-	}
-
 }

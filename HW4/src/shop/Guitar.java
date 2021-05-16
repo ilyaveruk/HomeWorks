@@ -16,7 +16,7 @@ public class Guitar extends Instrument {
 
 	@Override
 	public String toString() {
-		return String.format("Guitar(%s) %s(%d), price=%d", type, company, getSerial(), getPrice());
+		return String.format("Guitar(%s) %s(%d), price = %d", type, company, getSerial(), getPrice());
 	}
 
 }
