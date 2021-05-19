@@ -66,13 +66,13 @@ public class Shop {
 
 	public int sellAll(int[] serials) throws MusicShopException {
 		int unsold = 0;
-		
-		try {
-			for (int i = 0; i < serials.length; i++)
+
+		for (int i = 0; i < serials.length; i++)
+			try {
 				sell(serials[i]);
-		} catch (MusicShopException e) {
-			unsold++;
-		}
+			} catch (MusicShopException e) {
+				unsold++;
+			}
 
 		return unsold;
 
