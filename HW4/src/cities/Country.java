@@ -45,10 +45,7 @@ public class Country implements Comparable<Country> {
 
 	public String report() {
 		StringBuilder stringToRet=new StringBuilder();
-		stringToRet.append(name);
-		stringToRet.append("(");
-		stringToRet.append(this.population());
-		stringToRet.append(") :");
+		
 		for(City cityTemp : cities) {
 			stringToRet.append(" ");
 			stringToRet.append(cityTemp.getName());
@@ -57,7 +54,7 @@ public class Country implements Comparable<Country> {
 			stringToRet.append("),");
 		}
 		stringToRet.deleteCharAt(stringToRet.toString().length()-1);
-		return stringToRet.toString();
+		return name + "(" + this.population() + ") :" + stringToRet.toString();
 	}
 
 	@Override

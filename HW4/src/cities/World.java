@@ -17,9 +17,8 @@ public class World {
 
 		if (countries.get(countryName) == null)
 			throw new IllegalArgumentException();
-		// need to change to put
-		countries.get(countryName).addCity(new City(name, countries.get(countryName), population));
 
+		countries.get(countryName).addCity(new City(name, countries.get(countryName), population));
 	}
 
 	public int population() {
@@ -48,10 +47,8 @@ public class World {
 			toRet.append(country.report());
 			toRet.append("\n");
 		}
-		toRet.append("Total population is ");
-		toRet.append(this.population());
-		toRet.append("\n");
-		return toRet.toString();
+
+		return toRet.toString() + "Total population is " + this.population() + "\n";
 	}
 
 }
