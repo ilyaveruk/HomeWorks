@@ -50,68 +50,63 @@ public class Maze implements GraphInterface<Place> {
 		}
 		return stringToRet.toString();
 	}
-	
-	
+
 	public boolean isSolvable() {
 		Graph<Place> graph = new Graph<>();
-		Place p1,p2;
+		Place p1, p2;
 		try {
-			for(int i= 0 ; i<size ; i++)
-				for(int j=0 ; j<size ; j++)
-					if(mazeMat[i][j] == null)
+			for (int i = 0; i < size; i++)
+				for (int j = 0; j < size; j++)
+					if (mazeMat[i][j] == null)
 						graph.addVertex(new Place(i, j, size));
-			for(int i= 0 ; i<size ; i++)
-				for(int j=0 ; j<size ; j++)
-				{
-				
-					if( i+1 >= 0 && i+1 < size && j >= 0 && j < size && walls.contains(mazeMat[i + 1][j]) == false && walls.contains(mazeMat[i][j]) == false) 
-					{
-						p2=new Place(i,j,size);
-						p1=new Place(i+1, j, size);
-						graph.addEdge(p1,p2);
+			for (int i = 0; i < size; i++)
+				for (int j = 0; j < size; j++) {
+
+					if (i + 1 >= 0 && i + 1 < size && j >= 0 && j < size && walls.contains(mazeMat[i + 1][j]) == false
+							&& walls.contains(mazeMat[i][j]) == false) {
+						p2 = new Place(i, j, size);
+						p1 = new Place(i + 1, j, size);
+						graph.addEdge(p1, p2);
 					}
-					if( i >= 0 && i < size && j+1 >= 0 && j+1 < size && walls.contains(mazeMat[i][j+1]) == false && walls.contains(mazeMat[i][j]) == false) 
-					{
-						p2=new Place(i,j,size);
-						p1=new Place(i, j+1, size);
-						graph.addEdge(p1,p2);
+					if (i >= 0 && i < size && j + 1 >= 0 && j + 1 < size && walls.contains(mazeMat[i][j + 1]) == false
+							&& walls.contains(mazeMat[i][j]) == false) {
+						p2 = new Place(i, j, size);
+						p1 = new Place(i, j + 1, size);
+						graph.addEdge(p1, p2);
 					}
 				}
-			if(graph.connected(start, end) == true)
+			if (graph.connected(start, end) == true)
 				return true;
+		} catch (GraphException e) {
+			e.printStackTrace();
 		}
-		catch (GraphException e) {
-				e.printStackTrace();
-			}
 		return false;
 	}
-	
-	@Override
-	public Collection<Place> neighbours(Place p){
-		int x =p.getX();
-		int y= p.getY();
-		Place neighbour;
-		List<Place> neighborsList=new ArrayList<Place>();
-		
-		 
-		 
-		 if( x+1 >= 0 && x+1 < size && y >= 0 && y < size&&walls.contains(neighbour=new Place(x+1, y, size)) == false) 
-			 neighborsList.add(neighbour);
-		 
-		
-		 if( x-1 >= 0 && x-1 < size && y >= 0 && y < size&&walls.contains(neighbour=new Place(x-1, y, size)) == false) 
-			 neighborsList.add(neighbour);
-		 
-		 
-		 if( x >= 0 && x < size && y-1 >= 0 && y-1 < size&&walls.contains(neighbour=new Place(x, y-1, size)) == false) 
-			 neighborsList.add(neighbour);
-		 
-		 
-		 if( x >= 0 && x < size && y+1 >= 0 && y+1 < size&&walls.contains(neighbour=new Place(x, y+1, size)) == false) 
-			 neighborsList.add(neighbour);
-		 
-		return neighborsList;	
-	}
 
+	@Override
+	public Collection<Place> neighbours(Place p) {
+		int x = p.getX();
+		int y = p.getY();
+		Place neighbour;
+		List<Place> neighborsList = new ArrayList<Place>();
+
+		if (x + 1 >= 0 && x + 1 < size && y >= 0 && y < size
+				&& walls.contains(neighbour = new Place(x + 1, y, size)) == false)
+			neighborsList.add(neighbour);
+
+		if (x - 1 >= 0 && x - 1 < size && y >= 0 && y < size
+				&& walls.contains(neighbour = new Place(x - 1, y, size)) == false)
+			neighborsList.add(neighbour);
+
+		if (x >= 0 && x < size && y - 1 >= 0 && y - 1 < size
+				&& walls.contains(neighbour = new Place(x, y - 1, size)) == false)
+			neighborsList.add(neighbour);
+
+		if (x >= 0 && x < size && y + 1 >= 0 && y + 1 < size
+				&& walls.contains(neighbour = new Place(x, y + 1, size)) == false)
+			neighborsList.add(neighbour);
+
+		return neighborsList;
+	}
 
 }

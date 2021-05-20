@@ -51,9 +51,12 @@ public class Graph<V> {
 
 		if (verticesChecked.contains(v1) == true)
 			return false;
+		
 		verticesChecked.add(v1);
+		
 		if (v1.equals(v2))
 			return true;
+		
 		Set<V> neighbors = edges.get(v1);
 		for (V v : neighbors) {
 			if (rucFunToCheckConnect(v, v2, verticesChecked)) {
