@@ -49,35 +49,59 @@ public class TwoArrays implements Iterable<Integer> {
 //			return a[count++];
 //-----------------------------------------------------------------
 
+			if (a2.length >= a1.length) {
+				for (; count < totalLength; count++) {
 
-			for (; count < totalLength; count++) {
+					if (count % 2 == 0 && i < minTemp.length) {
+						count++;
+						holder = minTemp[i++];
+						return holder;
+					}
+					if (count % 2 != 0 && j < maxTemp.length - 1) {
+						count++;
+						holder = maxTemp[j++];
+						return holder;
+					}
 
-				if (count % 2 == 0 && i < minTemp.length) {
-					count++;
-					holder = minTemp[i++];
-					return holder;
+					if (i == minTemp.length && j <= maxTemp.length - 2) {
+						holder = maxTemp[j++];
+						return holder;
+					}
+
 				}
-				if (count % 2 != 0 && j < maxTemp.length-1) {
-					count++;
-					holder = maxTemp[j++];
-					return holder;
-				}
-				
-				if (i == minTemp.length && j <= maxTemp.length -2  ) {
-					holder = maxTemp[j++];
-					return holder;
-				}
+					
 
 			}
+			else {
+				for (; count < totalLength; count++) {
 
+					if (count % 2 == 0 && i < maxTemp.length) {
+						count++;
+						holder = maxTemp[i++];
+						return holder;
+					}
+					if (count % 2 != 0 && j < minTemp.length ) {
+						count++;
+						holder = minTemp[j++];
+						return holder;
+					}
+
+					if (j == minTemp.length && i <= maxTemp.length-2) {
+						holder = maxTemp[i++];
+						return holder;
+					}
+
+				}
+	
+			}
 			return maxTemp[maxTemp.length -1];
-
 		}
+
 	}
 
 	public static void main(String[] args) {
 		int[] a1 = { 1, 2, 3, 4 };
-		int[] a2 = { 100, 101, 102};
+		int[] a2 = { 100 ,102,103,104,105,106};
 
 		TwoArrays aa = new TwoArrays(a1, a2);
 		for (int i : aa)
