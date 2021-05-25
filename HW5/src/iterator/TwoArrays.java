@@ -1,4 +1,5 @@
 package iterator;
+
 import java.util.Iterator;
 
 public class TwoArrays implements Iterable<Integer> {
@@ -30,8 +31,7 @@ public class TwoArrays implements Iterable<Integer> {
 		public Integer next() {
 			int maxTemp[] = a1.length > a2.length ? a1 : a2;
 			int minTemp[] = a1.length <= a2.length ? a1 : a2;
-			int minCnt=a1.length > a2.length ? j : i;
-			int maxCnt = a1.length < a2.length ? j : i;
+			int totalLength = maxTemp.length + minTemp.length;
 //			int i = 0, j = 1, cnt = 0;
 //			Integer[] a = new Integer[a1.length + a2.length];
 //
@@ -48,62 +48,36 @@ public class TwoArrays implements Iterable<Integer> {
 //
 //			return a[count++];
 //-----------------------------------------------------------------
-//
-//
-//			while (count < min + max ) {
-//
-//				if (count % 2 == 0 && i<a1.length) {
-//					count++;
-//					holder = a1[i++];
-//					return holder;
-//				}
-//
-//				if (count % 2 != 0 && j < a2.length) {
-//					count++;
-//					holder = a2[j++];
-//					return holder;
-//				}
-//				
-//			
-//				if(i == a1.length && j<a2.length) {
-//					holder=a2[j++];
-//				return holder;
-//				}
-//				
-//				break;
-//				
-//			}
-//			//need to break the loop and not return null and check if a1 longer length;
-//			return return a2[a2.length-1];	
-//------------------------------------------------------------------------------
 
-			for (; count < minTemp.length + maxTemp.length; count++) {
 
-				if (count % 2 == 0 && minCnt < minTemp.length) {
+			for (; count < totalLength; count++) {
+
+				if (count % 2 == 0 && i < minTemp.length) {
 					count++;
 					holder = minTemp[i++];
 					return holder;
 				}
-				if (count % 2 != 0 && maxCnt < maxTemp.length) {
+				if (count % 2 != 0 && j < maxTemp.length-1) {
 					count++;
 					holder = maxTemp[j++];
 					return holder;
 				}
-				if (minCnt == minTemp.length && maxCnt < maxTemp.length- minTemp.length) {
+				
+				if (i == minTemp.length && j <= maxTemp.length -2  ) {
 					holder = maxTemp[j++];
 					return holder;
 				}
 
 			}
 
-			return maxTemp[maxTemp.length - 1];
+			return maxTemp[maxTemp.length -1];
 
 		}
 	}
 
 	public static void main(String[] args) {
 		int[] a1 = { 1, 2, 3, 4 };
-		int[] a2 = { 100,101,102,103,104,105,106,107,108,109};
+		int[] a2 = { 100, 101, 102};
 
 		TwoArrays aa = new TwoArrays(a1, a2);
 		for (int i : aa)
