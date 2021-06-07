@@ -17,19 +17,19 @@ public class Voting2 extends Application {
 	public void start(Stage stage) {
 		
 		VBox vbox;
-		//MyController controller;
+		MyController controller;
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("Screen.fxml"));
+			loader.setLocation(getClass().getResource("VotingScreen.fxml"));
 			vbox = loader.load();
-			//controller = loader.getController();
+			controller = loader.getController();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;
 		}
 
 		
-		//controller.setTextAreaText("0");
+		controller.setTextArea("0");
 		
 		Scene scene = new Scene(vbox);
 		stage.setScene(scene);
