@@ -1,198 +1,201 @@
 package mines;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
 public class Mines {
-	private int numMines, height, width, opened = 0;
-	private ArrayList<String>[][] board;
+
+	private int height, width, numMines;
+	private Place[][] board;
 	private boolean showAll = false;
 
 	public Mines(int height, int width, int numMines) {
-		Single s = new Single();
-		this.height = height;
-		this.width = width;
-		board = new ArrayList[height][width]; // Create game board.
-		for (int i = 0; i < height; i++) // Initialize game board
-			for (int j = 0; j < width; j++) {
-				board[i][j] = (s.singleMethod(height, width, i, j));// Set status of each slot
-				board[i][j].addAll(s.getNeighbors(i, j)); // add all neighbors
-
-				// 0-mines 1-open 2-flag 3-Close Mines 4-Revealed 5-12-neighbors//
-			}
-
 		this.numMines = numMines;
-
+		this.width = width;
+		this.height = height;
+		board = new Place[height][width];
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				board[i][j] = new Place();
+			}
+		}
+		Random rand = new Random();
+		for (int i = 0; i < numMines; i++)
+			board[rand.nextInt(height)][rand.nextInt(width)].setMine();
 	}
 
-	private class Single {
-		private int height, width;
+	public class Place
+	// Everything described by flags
+	{
+		private boolean mine = false, open = false, close = true, flag = false;
 
-		ArrayList<String> singleMethod(int height, int width, int i, int j) {
-			this.height = height;
-			this.width = width;
-			board[i][j] = new ArrayList<String>(4);
-			board[i][j].add("Flaged=0");
-			board[i][j].add("Mined=0");
-			board[i][j].add("Open=0");
-			board[i][j].add("Close Mines=0");
-			board[i][j].add("Revealed=0");
-			return board[i][j];
+		public void setMine() {
+			mine = true;
 		}
 
-		List<Integer> nearMines(int height, int width, int i, int j) {
-			List<Integer> list = new ArrayList<Integer>();
-			{
-				if (j + 1 < width)
-					if (board[i][j + 1] != null)
-						if (board[i][j + 1].contains("Mined=1"))
-							list.add(1);
-				if (i != 0)
-					if (board[i - 1][j] != null)
-						if (board[i - 1][j].contains("Mined=1"))
-							list.add(1);
-				if (j != 0)
-					if (board[i][j - 1] != null)
-						if (board[i][j - 1].contains("Mined=1"))
-							list.add(1);
-				if (i + 1 < height)
-					if (board[i + 1][j] != null)
-						if (board[i + 1][j].contains("Mined=1"))
-							list.add(1);
-				if (i != 0 && j + 1 < width)
-					if (board[i - 1][j + 1] != null)
-						if (board[i - 1][j + 1].contains("Mined=1"))
-							list.add(1);
-				if (i != 0 && j != 0)
-					if (board[i - 1][j - 1] != null)
-						if (board[i - 1][j - 1].contains("Mined=1"))
-							list.add(1);
-				if (i + 1 < height && j + 1 < width)
-					if (board[i + 1][j + 1] != null)
-						if (board[i + 1][j + 1].contains("Mined=1"))
-							list.add(1);
-				if (j != 0 && i + 1 < height)
-					if (board[i + 1][j - 1] != null)
-						if (board[i + 1][j - 1].contains("Mined=1"))
-							list.add(1);
-
-			}
-			return list;
+		public void setFlag() {
+			if (flag == false)
+				flag = true;
+			else
+				flag = false;
 		}
 
-		public List<String> getNeighbors(int i, int j) {
-			List<String> neighbors = new ArrayList<String>();
-			neighbors.add(0, Integer.toString(i) + Integer.toString(j + 1));
-			neighbors.add(1, Integer.toString(i) + Integer.toString(j - 1));
-			neighbors.add(2, Integer.toString(i + 1) + Integer.toString(j + 1));
-			neighbors.add(3, Integer.toString(i + 1) + Integer.toString(j));
-			neighbors.add(4, Integer.toString(i + 1) + Integer.toString(j - 1));
-			neighbors.add(5, Integer.toString(i - 1) + Integer.toString(j));
-			neighbors.add(6, Integer.toString(i - 1) + Integer.toString(j + 1));
-			neighbors.add(7, Integer.toString(i - 1) + Integer.toString(j - 1));
-			return neighbors;
+		public void openPlace() {
+			close = false;
+			open = true;
+		}
 
+		public boolean getMine() {
+			return mine;
+		}
+
+		public boolean getClose() {
+			return close;
+		}
+
+		public boolean getOpen() {
+			return open;
+		}
+
+		public boolean getFlag() {
+			return flag;
 		}
 
 	}
 
 	public boolean addMine(int i, int j) {
-		Single s = new Single();
-		String str = null;
+		if (board[i][j].getMine() == true)
+			return false;
+		board[i][j].setMine();
 		numMines++;
-		board[i][j].set(1, "Mined=1"); // Once mine is added,Board is updated
-		for (int k = 0; k < this.height; k++)
-			for (int l = 0; l < this.width; l++) {
-				str = String.format("%s%d", "Close Mines=", s.nearMines(height, width, k, l).size());
-				board[k][l].set(3, str); // Set how many mines are next to the slot
-			}
 		return true;
 	}
 
 	public boolean open(int i, int j) {
-		if (i < 0 || i == height || j < 0 || j == width)
+		boolean canOpenNeighbors = true;
+		if (board[i][j].getMine() == true || board[i][j].getOpen() == true)
 			return false;
-		if (board[i][j].contains("Mined=1")) {
-			showAll=true;
-			return false;
+		board[i][j].openPlace();
+
+		/* checks if one of the Neighbors is a mine */
+		if (i + 1 != height)
+			if (board[i + 1][j].getMine() == true)
+				return true;
+		if (i + 1 != height && j + 1 != width)
+			if (board[i + 1][j + 1].getMine() == true)
+				return true;
+		if (i + 1 != height && j != 0)
+			if (board[i + 1][j - 1].getMine() == true)
+				return true;
+		if (j != 0)
+			if (board[i][j - 1].getMine() == true)
+				return true;
+		if (j + 1 != width)
+			if (board[i][j + 1].getMine() == true)
+				return true;
+		if (i != 0)
+			if (board[i - 1][j].getMine() == true)
+				return true;
+		if (i != 0 && j + 1 != width)
+			if (board[i - 1][j + 1].getMine() == true)
+				return true;
+		if (i != 0 && j != 0)
+			if (board[i - 1][j - 1].getMine() == true)
+				return true;
+
+		/* open the Neighbors */
+		if (canOpenNeighbors == true) {
+			if (i + 1 != height)
+				this.open(i + 1, j);
+			if (i + 1 != height && j + 1 != width)
+				this.open(i + 1, j + 1);
+			if (i + 1 != height && j != 0)
+				this.open(i + 1, j - 1);
+			if (j != 0)
+				this.open(i, j - 1);
+			if (j + 1 != width)
+				this.open(i, j + 1);
+			if (i != 0)
+				this.open(i - 1, j);
+			if (i != 0 && j + 1 != width)
+				this.open(i - 1, j + 1);
+			;
+			if (i != 0 && j != 0)
+				this.open(i - 1, j - 1);
 		}
-		if (board[i][j].contains("Mined=0")) {
-			if (board[i][j].contains("Open=0")) {
-				opened++;
-				board[i][j].set(2, "Open=1");
-			}
-		}
-		if (board[i][j].contains("Close Mines=0") && board[i][j].contains("Revealed=0")) {
-			board[i][j].set(2, "Open=1");
-			if (board[i][j].contains("Open=0"))
-				opened++;
-			board[i][j].set(4, "Revealed=1");
-			openNeighbors(i, j);
-		} else
-			return false;
-		open(i + 1, j);
-		open(i - 1, j);
-		open(i, j - 1);
-		open(i, j + 1);
 		return true;
 	}
 
-	public boolean openNeighbors(int i, int j) {
-		for (int c = 5; c < board[i][j].size(); c++) {
-			String str;
-			char e, d;
-			int a, b;
-			str = board[i][j].get(c).toString();
-			e = str.charAt(0);
-			d = str.charAt(1);
-			a = Character.getNumericValue(e);
-			b = Character.getNumericValue(d);
-			if (a >= 0 && b >= 0 && a <= height - 1 && b <= width - 1) {
-				if (board[a][b].contains("Open=0"))
-					opened++;
-				board[a][b].set(2, "Open=1");
-			}
-		}
-		return false;
-	}
-
 	public void toggleFlag(int x, int y) {
-		if (board[x][y].contains("Flaged=1"))
-			board[x][y].set(0, "Flaged=0");
-		else
-			board[x][y].set(0, "Flaged=1");
+		board[x][y].setFlag();
 	}
 
 	public boolean isDone() {
-		int surface = this.height * this.width;
-		if ((surface - opened) == numMines)
+		int counter = 0;
+		for (int i = 0; i < height; i++)
+			for (int j = 0; j < width; j++)
+				if (board[i][j].getOpen() == true && board[i][j].getMine() == false)
+					counter++;
+		if (counter == height * width - numMines)
 			return true;
 		else
 			return false;
 	}
 
 	public String get(int i, int j) {
-		if (showAll) {
-			if (board[i][j].contains("Flaged=1"))
-				return "F";
-			else if (board[i][j].contains("Mined=1"))
+		int numOfMines = 0;
+		if (showAll == true) {
+			if (board[i][j].getMine() == true)
 				return "X";
-			else if (board[i][j].contains("Close Mines=0"))
+			numOfMines = checkHowManyMines(i, j);
+			if (numOfMines == 0)
 				return " ";
 			else
-				return board[i][j].get(3).substring(12, 13);
-		}
-		if (board[i][j].contains("Open=0"))
-			if (board[i][j].contains("Flaged=1"))
-				return "F";
+				return Integer.toString(numOfMines);
+
+		} else {
+			if (board[i][j].getClose() == true)
+				if (board[i][j].getFlag() == true)
+					return "F";
+				else
+					return ".";
+			if (board[i][j].getOpen() == true)
+				if (board[i][j].getMine() == true)
+					return "X";
+			numOfMines = checkHowManyMines(i, j);
+			if (numOfMines == 0)
+				return " ";
 			else
-				return ".";
-		else if (board[i][j].contains("Mined=1"))
-			return "X";
-		else if (board[i][j].contains("Close Mines=0"))
-			return " ";
-		else
-			return board[i][j].get(3).substring(12, 13);
+				return Integer.toString(numOfMines);
+		}
+	}
+
+	private int checkHowManyMines(int i, int j) {
+		int count = 0;
+		if (i + 1 != height)
+			if (board[i + 1][j].getMine() == true)
+				count++;
+		if (i + 1 != height && j + 1 != width)
+			if (board[i + 1][j + 1].getMine() == true)
+				count++;
+		if (i + 1 != height && j != 0)
+			if (board[i + 1][j - 1].getMine() == true)
+				count++;
+		if (j != 0)
+			if (board[i][j - 1].getMine() == true)
+				count++;
+		if (j + 1 != width)
+			if (board[i][j + 1].getMine() == true)
+				count++;
+		if (i != 0)
+			if (board[i - 1][j].getMine() == true)
+				count++;
+		if (i != 0 && j + 1 != width)
+			if (board[i - 1][j + 1].getMine() == true)
+				count++;
+		if (i != 0 && j != 0)
+			if (board[i - 1][j - 1].getMine() == true)
+				count++;
+		return count;
 	}
 
 	public void setShowAll(boolean showAll) {
@@ -200,13 +203,15 @@ public class Mines {
 	}
 
 	public String toString() {
-		String str = "";
-		for (int i = 0; i < height; i++)
+		StringBuilder stringToRet = new StringBuilder();
+		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				str += this.get(i, j);
-				if (j == width - 1)
-					str += "\n";
+				stringToRet.append(this.get(i, j));
 			}
-		return str;
+			stringToRet.append("\n");
+		}
+
+		return stringToRet.toString();
 	}
+
 }

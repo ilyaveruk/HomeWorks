@@ -22,7 +22,7 @@ public class MinesFX extends Application {
 	Mines game;
 	Button b;
 	String setHeight, setWidth, setMines;
-	BackgroundFill fill = new BackgroundFill(Color.AQUA, new CornerRadii(10), null);
+	BackgroundFill fill = new BackgroundFill(Color.BLANCHEDALMOND, new CornerRadii(10), null);
 	Background bBack = new Background(fill);
 	String t = ".";
 
@@ -67,11 +67,11 @@ public class MinesFX extends Application {
 		grid.add(width, 0, 18);
 		grid.add(fWidth, 1, 18);
 		grid.setStyle(
-				"-fx-background-image: url(\"file:///C:/Users/Tal/eclipse-workspace/targil5/src/mines/image2.jpg\")");
+				"-fx-background-image: url(C:\\Users\\ilia1\\git\\HomeWorks\\HW5\\src\\mines\\image2.jpg)");
 
-		class BoardReset implements EventHandler<javafx.event.ActionEvent> {
+		class BoardReset implements EventHandler<ActionEvent> {
 			@Override
-			public void handle(javafx.event.ActionEvent event) {
+			public void handle(ActionEvent event) {
 
 				int i;
 				setHeight = fHeight.getText();
@@ -92,7 +92,7 @@ public class MinesFX extends Application {
 								((Labeled) grid.getChildren().get(i)).setText(String.valueOf(str.charAt(j++)));
 								if (str.charAt(j) == 'X')
 									((Button) grid.getChildren().get(i + 1)).setStyle(
-											"-fx-background-image: url(\"file:///C:/Users/Shahar/eclipse-workspace/targil5/src/mines/bomb.jpg\")");
+											"-fx-background-image: url(bomb.jpg)");
 								count++;
 								if (count == Integer.parseInt(setWidth)) {
 									j++;
