@@ -47,4 +47,9 @@ public class MinesFX extends Application {
 		stage.setScene(scene);
 		stage.show();
 	}
+	
+	
+	private Mines mines;
+	
+	
 }
