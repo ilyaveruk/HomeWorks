@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="477.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mines.Controller">
+   <children>
+      <HBox prefHeight="477.0" prefWidth="675.0">
+         <children>
+            <VBox prefHeight="250.0" prefWidth="140.0">
+               <children>
+                  <Label fx:id="level" prefHeight="30.0" prefWidth="62.0" text="level 1" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets left="40.0" right="40.0" top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="extraBombs" text="2 extra bombs" textAlignment="CENTER" textFill="RED" underline="true">
+                     <VBox.margin>
+                        <Insets left="25.0" right="25.0" top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="msg" prefHeight="30.0" prefWidth="98.0" text="Good Luck" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="reset" mnemonicParsing="false" onAction="#resetGame" prefHeight="34.0" prefWidth="118.0" text="reset">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="width">
+                                       <VBox.margin>
+                                          <Insets left="30.0" top="20.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="height">
+                                       <VBox.margin>
+                                          <Insets left="30.0" top="20.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="mines">
+                                       <VBox.margin>
+                                          <Insets left="30.0" top="20.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="100.0" prefWidth="56.0">
+                                 <children>
+                                    <TextArea fx:id="textWidth" prefHeight="10.0" prefWidth="48.0" text="10">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </TextArea>
+                                    <TextArea fx:id="textHeight" prefHeight="14.0" prefWidth="48.0" text="10">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </TextArea>
+                                    <TextArea fx:id="textMines" prefHeight="14.0" prefWidth="48.0" text="10">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </TextArea>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="150.0" />
+                     </VBox.margin>
+                  </VBox>
+               </children>
+            </VBox>
+            <StackPane fx:id="stackpane1" prefHeight="478.0" prefWidth="538.0" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
