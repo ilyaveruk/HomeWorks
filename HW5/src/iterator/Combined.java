@@ -1,12 +1,14 @@
 package iterator;
 
+
 import java.util.Iterator;
+;
 
 public class Combined<E> implements Iterable<E> {
 
 	private Iterator<E> first;
 	private Iterator<E> second;
-	private int reset = 0;
+	private int set = 0;
 
 	public Combined(Iterable<E> first, Iterable<E> second) {
 		this.first = first.iterator();
@@ -27,11 +29,11 @@ public class Combined<E> implements Iterable<E> {
 
 		@Override
 		public E next() {
-			if ((reset == 0 && first.hasNext() && second.hasNext())) {
-				reset++;
+			if ((set == 0 && first.hasNext() && second.hasNext())) {
+				set++;
 				return first.next();
-			} else if (reset == 1 && first.hasNext() && second.hasNext()) {
-				reset = 0;
+			} else if (set == 1 && first.hasNext() && second.hasNext()) {
+				set = 0;
 				return second.next();
 			} else if (!(first.hasNext()))
 				return second.next();

@@ -5,7 +5,7 @@ import java.util.Iterator;
 public class TwoArrays implements Iterable<Integer> {
 
 	private int[] a1, a2;
-	private int reset = 0;
+	private int set = 0;
 
 	public TwoArrays(int[] a1, int[] a2) {
 		this.a1 = a1;
@@ -29,11 +29,11 @@ public class TwoArrays implements Iterable<Integer> {
 
 		@Override
 		public Integer next() {
-			if ((reset == 0 && !(count >= a1.length)) && (!(count >= a2.length))) {
-				reset++;
+			if ((set == 0 && !(count >= a1.length)) && (!(count >= a2.length))) {
+				set++;
 				return a1[count];
-			} else if (reset == 1 && !(count >= a2.length) && (!(count >= a2.length))) {
-				reset = 0;
+			} else if (set == 1 && !(count >= a2.length) && (!(count >= a2.length))) {
+				set = 0;
 				return a2[count++];
 			} else if (count >= a1.length)
 				return a2[count++];
